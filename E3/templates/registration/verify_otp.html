@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Verify OTP - E3 Lounge{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card otp-card">
+    <p class="eyebrow">Phone Verification</p>
+    <h1>Enter your OTP</h1>
+    <p class="muted">We sent a 6-digit code to {{ phone }}. It expires in 5 minutes.</p>
+    <form method="post" class="form-card">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn" type="submit">Verify and Login</button>
+    </form>
+    <form method="post" action="{% url 'customer_resend_otp' %}" class="resend-form">
+      {% csrf_token %}
+      <button id="resendBtn" class="btn ghost" name="resend" value="1" type="submit" disabled>Resend OTP</button>
+      <span id="countdown" class="muted"></span>
+    </form>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const resendBtn = document.getElementById("resendBtn");
+  const countdown = document.getElementById("countdown");
+  let seconds = Math.min(Number("{{ seconds_remaining|default:0 }}"), 60);
+
+  function tick() {
+    if (seconds > 0) {
+      resendBtn.disabled = true;
+      countdown.textContent = `Resend available in ${seconds}s`;
+      seconds -= 1;
+      window.setTimeout(tick, 1000);
+    } else {
+      resendBtn.disabled = false;
+      countdown.textContent = "Didn't receive it?";
+    }
+  }
+  tick();
+</script>
+{% endblock %}

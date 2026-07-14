@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Bookings - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Manage Bookings</h1>
+  <div class="table-wrap"><table><thead><tr><th>Member</th><th>Type</th><th>Date</th><th>Time</th><th>Amount</th><th>Status</th><th>Update</th></tr></thead><tbody>
+  {% for booking in bookings %}
+    <tr><td>{{ booking.customer.member_id }}</td><td>{{ booking.get_booking_type_display }}</td><td>{{ booking.date }}</td><td>{{ booking.start_time }} - {{ booking.end_time }}</td><td>Rs {{ booking.amount }}</td><td>{{ booking.payment_status }} / {{ booking.booking_status }}</td><td><form method="post" action="{% url 'booking_status_update' booking.id %}">{% csrf_token %}<select name="payment_status"><option value="unpaid" {% if booking.payment_status == "unpaid" %}selected{% endif %}>Unpaid</option><option value="paid" {% if booking.payment_status == "paid" %}selected{% endif %}>Paid</option><option value="refunded" {% if booking.payment_status == "refunded" %}selected{% endif %}>Refunded</option></select><select name="booking_status"><option value="pending" {% if booking.booking_status == "pending" %}selected{% endif %}>Pending</option><option value="confirmed" {% if booking.booking_status == "confirmed" %}selected{% endif %}>Confirmed</option><option value="cancelled" {% if booking.booking_status == "cancelled" %}selected{% endif %}>Cancelled</option><option value="completed" {% if booking.booking_status == "completed" %}selected{% endif %}>Completed</option></select><button>Save</button></form></td></tr>
+  {% empty %}<tr><td colspan="7">No bookings yet.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

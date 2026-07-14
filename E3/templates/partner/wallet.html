@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Wallet Ledger - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head"><h1>Wallet Ledger</h1><a class="btn" href="{% url 'wallet_entry_create' %}">New Entry</a></div>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Member</th><th>Type</th><th>Amount</th><th>Reason</th><th>Reference</th></tr></thead><tbody>{% for entry in entries %}<tr><td>{{ entry.created_at|date:"d M Y H:i" }}</td><td>{{ entry.member.member_id }}</td><td>{{ entry.transaction_type }}</td><td>Rs {{ entry.amount }}</td><td>{{ entry.reason }}</td><td>{{ entry.reference_type }}</td></tr>{% empty %}<tr><td colspan="6">No ledger entries yet.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

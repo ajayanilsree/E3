@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Staff - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head"><h1>Manage Staff</h1><a class="btn" href="{% url 'staff_create' %}">Create Staff</a></div>
+  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Active</th></tr></thead><tbody>{% for person in staff %}<tr><td>{{ person.get_full_name|default:person.username }}</td><td>{{ person.username }}</td><td>{{ person.email }}</td><td>{{ person.is_active }}</td></tr>{% empty %}<tr><td colspan="4">No staff accounts yet.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+Django==5.0.6
+gunicorn==22.0.0
+whitenoise==6.7.0
+dj-database-url==2.2.0
+psycopg2-binary==2.9.9
+qrcode==7.4.2
+pillow==10.3.0
+cloudinary==1.40.0
+django-cloudinary-storage==0.3.0

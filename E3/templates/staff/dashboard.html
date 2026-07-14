@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard - E3 Lounge{% endblock %}
+{% block content %}
+<section class="dash-head">
+  <div><p class="eyebrow">Staff Portal</p><h1>Daily Operations</h1><p>Tasks, checklists, member lookup, bookings, and events for today.</p></div>
+  <div class="actions"><a class="btn" href="{% url 'member_lookup' %}">Member Lookup</a><a class="btn ghost" href="{% url 'sale_create' %}">Log Sale</a><a class="btn ghost" href="{% url 'session_create' %}">Log Session</a></div>
+</section>
+{% include "shared/notifications.html" %}
+<section class="grid two">
+  <article class="panel">
+    <h2>My Tasks</h2>
+    {% for task in tasks %}
+    <div class="list-row">
+      <div><strong>{{ task.title }}</strong><small>{{ task.priority }} · due {{ task.due_date|default:"not set" }}</small></div>
+      <form method="post" action="{% url 'task_status_update' task.id %}">{% csrf_token %}<select name="status"><option value="todo" {% if task.status == "todo" %}selected{% endif %}>To Do</option><option value="doing" {% if task.status == "doing" %}selected{% endif %}>Doing</option><option value="done" {% if task.status == "done" %}selected{% endif %}>Done</option></select><button>Update</button></form>
+    </div>
+    {% empty %}<p class="muted">No assigned tasks.</p>{% endfor %}
+  </article>
+  <article class="panel">
+    <h2>Today's Checklists</h2>
+    {% for checklist in checklists %}
+      <h3>{{ checklist.template.name }}</h3>
+      {% for item in checklist.items.all %}
+      <form method="post" action="{% url 'checklist_item_toggle' item.id %}" class="check-row">{% csrf_token %}<button>{% if item.completed %}Done{% else %}Mark{% endif %}</button><span class="{% if item.completed %}done{% endif %}">{{ item.text }}</span></form>
+      {% endfor %}
+    {% empty %}<p class="muted">No checklist assigned today.</p>{% endfor %}
+  </article>
+</section>
+<section class="grid two">
+  <article class="panel"><h2>Today's Bookings</h2>{% for booking in today_bookings %}<div class="list-row"><strong>{{ booking.customer.member_id }}</strong><span>{{ booking.start_time }} · {{ booking.booking_status }}</span></div>{% empty %}<p class="muted">No bookings today.</p>{% endfor %}</article>
+  <article class="panel"><h2>Today's Events</h2>{% for event in today_events %}<div class="list-row"><strong>{{ event.name }}</strong><span>{{ event.time }}</span></div>{% empty %}<p class="muted">No events today.</p>{% endfor %}</article>
+</section>
+{% endblock %}

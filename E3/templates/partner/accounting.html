@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Accounting Tracker - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head"><div><p class="eyebrow">Partner Only</p><h1>Accounting Tracker</h1><p class="muted">A business tracker and CA export aid, not official accounting software.</p></div></div>
+  <form method="get" class="filters"><label>Start <input type="date" name="start" value="{{ start }}"></label><label>End <input type="date" name="end" value="{{ end }}"></label><button class="btn">Filter</button></form>
+</section>
+<section class="metrics">
+  <div class="metric"><span>Total Revenue</span><strong>Rs {{ total_revenue }}</strong></div>
+  <div class="metric"><span>Total Expenses</span><strong>Rs {{ total_expenses }}</strong></div>
+  <div class="metric"><span>Profit / Loss Estimate</span><strong>Rs {{ profit_loss }}</strong></div>
+  <div class="metric"><span>Wallet Liability</span><strong>Rs {{ wallet_liability }}</strong></div>
+</section>
+<section class="grid two">
+  <article class="panel"><h2>Revenue by Category</h2><div class="list-row"><strong>Sales</strong><span>Rs {{ sales_revenue }}</span></div><div class="list-row"><strong>Gaming Sessions</strong><span>Rs {{ session_revenue }}</span></div><div class="list-row"><strong>Bookings</strong><span>Rs {{ booking_revenue }}</span></div><div class="list-row"><strong>Events</strong><span>Rs {{ event_revenue }}</span></div></article>
+  <article class="panel"><h2>Cash / UPI / Card Split</h2>{% for mode,total in payment_split.items %}<div class="list-row"><strong>{{ mode|upper }}</strong><span>Rs {{ total }}</span></div>{% endfor %}</article>
+</section>
+<section class="panel">
+  <h2>CSV Exports</h2>
+  <div class="quick-links"><a href="{% url 'export_report' 'sales' %}">Sales CSV</a><a href="{% url 'export_report' 'sessions' %}">Sessions CSV</a><a href="{% url 'export_report' 'expenses' %}">Expenses CSV</a><a href="{% url 'export_report' 'wallet' %}">Wallet CSV</a><a href="{% url 'export_report' 'bookings' %}">Bookings CSV</a><a href="{% url 'export_report' 'event-registrations' %}">Event Registrations CSV</a></div>
+</section>
+{% endblock %}

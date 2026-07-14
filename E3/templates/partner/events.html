@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Events - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head"><h1>Manage Events</h1><a class="btn" href="{% url 'event_create' %}">Create Event</a></div>
+  <div class="cards">{% for event in events %}<article class="card"><h2>{{ event.name }}</h2><p>{{ event.date }} {{ event.time }} · {{ event.status }}</p><p>Rs {{ event.entry_fee }} · Capacity {{ event.capacity }} · Seats left {{ event.seats_left }}</p></article>{% empty %}<p class="muted">No events yet.</p>{% endfor %}</div>
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Checklists - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head"><h1>Daily Checklists</h1><div class="actions"><a class="btn" href="{% url 'checklist_template_create' %}">New Template</a><a class="btn ghost" href="{% url 'daily_checklist_generate' %}">Generate Daily</a></div></div>
+  <h2>Templates</h2>
+  <div class="cards">{% for template in templates %}<article class="card"><h3>{{ template.name }}</h3><p>{{ template.get_checklist_type_display }}</p><p class="muted">{{ template.items|linebreaksbr }}</p></article>{% empty %}<p class="muted">No templates yet.</p>{% endfor %}</div>
+  <h2>Generated Checklists</h2>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Template</th><th>Assigned</th><th>Status</th></tr></thead><tbody>{% for checklist in checklists %}<tr><td>{{ checklist.date }}</td><td>{{ checklist.template.name }}</td><td>{{ checklist.assigned_to.username }}</td><td>{{ checklist.status }}</td></tr>{% empty %}<tr><td colspan="4">No daily checklists yet.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

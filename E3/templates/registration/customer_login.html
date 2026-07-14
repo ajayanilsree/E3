@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Customer Login - E3 Lounge{% endblock %}
+{% block body_class %}auth-premium-page{% endblock %}
+{% block content %}
+<section class="auth-premium-shell">
+  <div class="auth-premium-stack">
+    <img class="auth-premium-hero-logo" src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge">
+
+    <form method="post" class="auth-premium-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="auth-premium-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="auth-premium-field">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--user" aria-hidden="true"></span>
+          {{ form.username }}
+        </div>
+        {{ form.username.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <label for="{{ form.password.id_for_label }}">Password</label>
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--lock" aria-hidden="true"></span>
+          {{ form.password }}
+          <button class="auth-premium-password-toggle" type="button" data-password-toggle aria-label="Show password">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        {{ form.password.errors }}
+      </div>
+
+      <button class="auth-premium-action" type="submit">Login</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var toggle = document.querySelector("[data-password-toggle]");
+    var password = document.querySelector("#{{ form.password.id_for_label }}");
+    if (!toggle || !password) return;
+
+    toggle.addEventListener("click", function () {
+      var isHidden = password.type === "password";
+      password.type = isHidden ? "text" : "password";
+      toggle.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+      toggle.classList.toggle("is-active", isHidden);
+    });
+  }());
+</script>
+{% endblock %}

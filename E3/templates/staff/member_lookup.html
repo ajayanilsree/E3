@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Member Lookup - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Member Lookup</h1>
+  <form method="get" class="search-form">{{ form.as_p }}<button class="btn">Search</button></form>
+  <div class="table-wrap"><table><thead><tr><th>Member ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Wallet</th><th>Points</th></tr></thead><tbody>
+    {% for member in members %}<tr><td>{{ member.member_id }}</td><td>{{ member.user.get_full_name|default:member.user.username }}</td><td>{{ member.phone }}</td><td>{{ member.user.email }}</td><td>Rs {{ member.wallet_balance }}</td><td>{{ member.points_balance }}</td></tr>
+    {% empty %}<tr><td colspan="6">Search by member ID, phone, email, or username.</td></tr>{% endfor %}
+  </tbody></table></div>
+  <div class="actions"><a class="btn ghost" href="{% url 'wallet_entry_create' %}">Wallet Adjustment</a><a class="btn ghost" href="{% url 'point_entry_create' %}">Point Adjustment</a></div>
+</section>
+{% endblock %}

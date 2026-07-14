@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}E3 Lounge{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=8">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <header class="topbar">
+    <div class="wrap row">
+      <a class="brand" href="{% url 'home' %}">
+        <span class="logo">E3</span>
+        <span><strong>E3 Lounge</strong><small>Gaming lounge management</small></span>
+      </a>
+      <nav class="account-nav">
+        {% if user.is_authenticated %}
+          <a class="{% if request.resolver_match.url_name == 'dashboard' %}is-active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+          <span class="badge">{{ unread_notifications_count }} alerts</span>
+          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>Logout</button></form>
+        {% else %}
+          <a class="{% if request.resolver_match.url_name == 'customer_login' %}is-active{% endif %}" href="{% url 'customer_login' %}">Login</a>
+          <a class="btn-mini {% if request.resolver_match.url_name == 'register' %}is-active{% endif %}" href="{% url 'register' %}">Join</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap page">
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

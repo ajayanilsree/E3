@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="section-head">
+    <h1>{{ title }}</h1>
+    <a href="javascript:history.back()" class="btn ghost">Back</a>
+  </div>
+  <form method="post" enctype="multipart/form-data" class="form-card">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Save</button>
+  </form>
+</section>
+{% endblock %}

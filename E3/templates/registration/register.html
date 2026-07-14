@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Create Account - E3 Lounge{% endblock %}
+{% block body_class %}auth-premium-page auth-signup-page{% endblock %}
+{% block content %}
+<section class="auth-premium-shell auth-signup-shell">
+  <div class="auth-premium-stack auth-signup-stack">
+    <img class="auth-premium-hero-logo auth-signup-logo" src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge">
+
+    <form method="post" class="auth-premium-form auth-signup-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="auth-premium-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <p class="auth-signup-heading">Create Account</p>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--user" aria-hidden="true"></span>
+          {{ form.full_name }}
+        </div>
+        {{ form.full_name.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--mail" aria-hidden="true"></span>
+          {{ form.email }}
+        </div>
+        {{ form.email.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--user" aria-hidden="true"></span>
+          {{ form.username }}
+        </div>
+        {{ form.username.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--lock" aria-hidden="true"></span>
+          {{ form.password1 }}
+          <button class="auth-premium-password-toggle" type="button" data-password-toggle="id_password1" aria-label="Show password">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        {{ form.password1.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--lock" aria-hidden="true"></span>
+          {{ form.password2 }}
+          <button class="auth-premium-password-toggle" type="button" data-password-toggle="id_password2" aria-label="Show password">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        {{ form.password2.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--calendar" aria-hidden="true"></span>
+          {{ form.date_of_birth }}
+        </div>
+        {{ form.date_of_birth.errors }}
+      </div>
+
+      <div class="auth-premium-field">
+        <div class="auth-premium-input-wrap">
+          <span class="auth-premium-icon auth-premium-icon--phone" aria-hidden="true"></span>
+          {{ form.phone }}
+        </div>
+        {{ form.phone.errors }}
+      </div>
+
+      <button class="auth-premium-action" type="submit">Sign Up</button>
+    </form>
+
+    <div class="auth-signup-divider" aria-hidden="true"><span>OR</span></div>
+    <a class="auth-premium-action auth-signup-secondary" href="{% url 'customer_login' %}">Back to Login</a>
+  </div>
+</section>
+
+<script>
+  (function () {
+    document.querySelectorAll("[data-password-toggle]").forEach(function (toggle) {
+      var password = document.querySelector("#" + toggle.getAttribute("data-password-toggle"));
+      if (!password) return;
+
+      toggle.addEventListener("click", function () {
+        var isHidden = password.type === "password";
+        password.type = isHidden ? "text" : "password";
+        toggle.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+        toggle.classList.toggle("is-active", isHidden);
+      });
+    });
+  }());
+</script>
+{% endblock %}

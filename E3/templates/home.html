@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}E3 Lounge - Premium Gaming Lounge{% endblock %}
+{% block body_class %}home-page luxury-home{% endblock %}
+{% block extra_head %}
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="{% static 'css/luxury-home.css' %}?v=8">
+{% endblock %}
+{% block content %}
+<div class="e3-splash" data-e3-splash role="status" aria-live="polite" aria-label="Loading E3 Lounge">
+  <div class="e3-splash__inner">
+    <img class="e3-splash__logo" src="{% static 'images/e3-navbar-logo.png' %}" alt="E3 Lounge">
+    <p class="e3-splash__text">Initializing E3 Lounge...</p>
+  </div>
+</div>
+
+<nav class="navbar">
+  <a class="logo" href="#top" aria-label="E3 Lounge home">
+    <img src="{% static 'images/e3-navbar-logo.png' %}" alt="E3 Lounge" height="61">
+  </a>
+</nav>
+
+<section class="controller-hero" id="top" aria-label="Premium 3D gaming controller">
+  <div
+    class="controller-hero-canvas"
+    data-controller-hero
+    data-login-url="{% url 'customer_login' %}"
+    data-join-url="{% url 'register' %}"
+    data-touchpad-logo-url="{% static 'images/e3-touchpad-logo.png' %}"
+  ></div>
+</section>
+
+<button class="e3-scroll-indicator" type="button" data-scroll-indicator aria-label="Scroll to the experience section">
+  <span class="e3-scroll-indicator__arrow" aria-hidden="true">⌄</span>
+</button>
+
+<section class="lux-feature lux-feature-a" id="experiences">
+  <div class="feature-image reveal"></div>
+  <div class="feature-copy reveal">
+    <p class="lux-label">THE EXPERIENCE</p>
+    <h2>Designed like a private entertainment club.</h2>
+    <p>E3 Lounge brings together premium gaming stations, curated events, comfortable social spaces and hospitality-minded service for players who expect more than a standard gaming cafe.</p>
+    <div class="feature-list">
+      <span>PlayStation Zone</span>
+      <span>PC Arena</span>
+      <span>Food and Drinks</span>
+      <span>Community Events</span>
+    </div>
+  </div>
+</section>
+
+<section class="lux-feature lux-feature-b">
+  <div class="feature-copy reveal">
+    <p class="lux-label">PRIVATE SESSIONS</p>
+    <h2>Bring your squad, or build one here.</h2>
+    <p>Book private rooms, compete in weekly events, host celebrations, or settle into a focused solo session. The experience is elevated, calm and intentionally premium.</p>
+    <a class="text-link" href="{% url 'register' %}">Create your member account</a>
+  </div>
+  <div class="feature-image reveal"></div>
+</section>
+
+<section class="lux-banner reveal">
+  <p class="lux-label">E3 EVENTS</p>
+  <h2>Where tournaments feel like showcase nights.</h2>
+</section>
+
+<section class="lux-section">
+  <div class="lux-section-head reveal">
+    <p class="lux-label">GAMING ZONES</p>
+    <h2>Five spaces. One refined standard.</h2>
+  </div>
+  <div class="zone-showcase">
+    <article class="lux-zone zone-playstation reveal"><div><span>01</span><h3>PlayStation Zone</h3><p>Console sessions, sports nights and party-friendly experiences.</p></div></article>
+    <article class="lux-zone zone-pc reveal"><div><span>02</span><h3>PC Arena</h3><p>High-performance systems for competitive and casual play.</p></div></article>
+    <article class="lux-zone zone-vip reveal"><div><span>03</span><h3>VIP Room</h3><p>Private comfort for groups, birthdays and premium sessions.</p></div></article>
+    <article class="lux-zone zone-simulator reveal"><div><span>04</span><h3>Simulator Zone</h3><p>Immersive racing moments with a motorsport lounge feel.</p></div></article>
+    <article class="lux-zone zone-events reveal"><div><span>05</span><h3>Event Hall</h3><p>Tournaments, launches, watch parties and community evenings.</p></div></article>
+  </div>
+</section>
+
+<section class="lux-section lux-events">
+  <div class="lux-section-head reveal">
+    <p class="lux-label">UPCOMING</p>
+    <h2>Event tickets</h2>
+  </div>
+  <div class="ticket-list">
+    <article class="lux-ticket reveal"><time>FRI 07:00 PM</time><h3>Friday FIFA Cup</h3><p>Prize Pool: Rs 10,000</p><a href="{% url 'register' %}">Register</a></article>
+    <article class="lux-ticket reveal"><time>SAT 06:30 PM</time><h3>Valorant 5v5 Night</h3><p>Prize Pool: Rs 15,000</p><a href="{% url 'register' %}">Register</a></article>
+    <article class="lux-ticket reveal"><time>SUN 05:00 PM</time><h3>Racing Time Trial</h3><p>Prize Pool: Rs 7,500</p><a href="{% url 'register' %}">Register</a></article>
+  </div>
+</section>
+
+<section class="lux-section">
+  <div class="lux-section-head reveal">
+    <p class="lux-label">MEMBERSHIP</p>
+    <h2>Simple access. Elevated experience.</h2>
+  </div>
+  <div class="lux-memberships">
+    <article class="lux-plan tilt-card reveal"><p>Starter</p><h3>Casual Player</h3><ul><li>Member ID and wallet</li><li>Event registration</li><li>Standard hourly access</li></ul><a href="{% url 'register' %}">Start Playing</a></article>
+    <article class="lux-plan highlighted tilt-card reveal"><p>Pro</p><h3>Regular Gamer</h3><ul><li>Priority event updates</li><li>Bonus points tracking</li><li>Preferred booking slots</li></ul><a href="{% url 'register' %}">Go Pro</a></article>
+    <article class="lux-plan tilt-card reveal"><p>VIP</p><h3>Private Sessions</h3><ul><li>VIP room access</li><li>Group session support</li><li>Premium event invites</li></ul><a href="{% url 'register' %}">Join VIP</a></article>
+  </div>
+</section>
+
+<section class="lux-testimonials">
+  <div class="lux-section-head reveal">
+    <p class="lux-label">GUEST NOTES</p>
+    <h2>Quiet confidence from regular players.</h2>
+  </div>
+  <div class="lux-quotes reveal">
+    <article><p>"It feels less like a cafe and more like a private gaming club."</p><strong>Arjun K.</strong></article>
+    <article><p>"The setup, comfort and event nights make it feel premium from the moment you walk in."</p><strong>Maya S.</strong></article>
+    <article><p>"Clean stations, strong PCs, private rooms and a proper community atmosphere."</p><strong>Rohan V.</strong></article>
+  </div>
+</section>
+
+<footer class="lux-footer">
+  <div>
+    <a class="brand" href="#top"><span class="logo">E3</span><span><strong>E3 Lounge</strong><small>Premium Gaming Lounge</small></span></a>
+  </div>
+  <div><h3>Explore</h3><a href="#experiences">Experience</a><a href="{% url 'register' %}">Membership</a><a href="{% url 'customer_login' %}">Login</a></div>
+  <div><h3>Visit</h3><p>Open daily: 11 AM - 12 AM</p><p>E3 Lounge Gaming Arena</p><p>Instagram | YouTube | Discord</p></div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/home.js' %}?v=4"></script>
+<script type="module" src="{% static 'js/controller-hero.js' %}?v=27"></script>
+{% endblock %}

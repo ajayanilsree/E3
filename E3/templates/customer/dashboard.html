@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Customer Dashboard - E3 Lounge{% endblock %}
+{% block content %}
+<section class="dash-head">
+  <div>
+    <p class="eyebrow">Customer Portal</p>
+    <h1>Welcome, {{ user.first_name|default:user.username }}</h1>
+    <p>Member ID: <strong>{{ profile.member_id }}</strong> · Tier: {{ profile.get_membership_tier_display }}</p>
+  </div>
+  <div class="qr-card">{{ qr_svg|safe }}</div>
+</section>
+
+<section class="metrics">
+  <div class="metric"><span>Wallet Balance</span><strong>Rs {{ profile.wallet_balance }}</strong></div>
+  <div class="metric"><span>Points</span><strong>{{ profile.points_balance }}</strong></div>
+  <div class="metric"><span>Bookings</span><strong>{{ bookings|length }}</strong></div>
+</section>
+
+<div class="actions">
+  <a class="btn" href="{% url 'customer_booking_create' %}">Book Slot</a>
+  <a class="btn ghost" href="{% url 'customer_events' %}">Browse Events</a>
+</div>
+
+{% include "shared/notifications.html" %}
+
+<section class="grid two">
+  <article class="panel">
+    <h2>Booking History</h2>
+    <div class="list">
+      {% for booking in bookings %}
+      <div class="list-row"><div><strong>{{ booking.get_booking_type_display }}</strong><small>{{ booking.date }} {{ booking.start_time }} - {{ booking.end_time }}</small></div><span class="pill">{{ booking.booking_status }}</span></div>
+      {% empty %}<p class="muted">No bookings yet.</p>{% endfor %}
+    </div>
+  </article>
+  <article class="panel">
+    <h2>Transactions</h2>
+    <div class="list">
+      {% for entry in wallet_entries %}
+      <div class="list-row"><div><strong>{{ entry.get_transaction_type_display }} Rs {{ entry.amount }}</strong><small>{{ entry.reason }}</small></div><span>{{ entry.created_at|date:"d M" }}</span></div>
+      {% empty %}<p class="muted">No wallet transactions yet.</p>{% endfor %}
+    </div>
+  </article>
+</section>
+<section class="panel">
+  <h2>Receipts</h2>
+  <div class="list">
+    {% for receipt in receipts %}
+    <div class="list-row"><div><strong>{{ receipt.receipt_number }}</strong><small>{{ receipt.get_transaction_type_display }} · Rs {{ receipt.amount }}</small></div><a class="btn ghost" href="{% url 'receipt_download' receipt.id %}">PDF</a></div>
+    {% empty %}<p class="muted">No receipts yet.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

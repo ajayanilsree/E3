@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Events - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Events and Tournaments</h1>
+  <div class="cards">
+    {% for event in events %}
+      <article class="card">
+        <h2>{{ event.name }}</h2>
+        <p>{{ event.description|default:"Tournament details will be shared at the lounge." }}</p>
+        <p><strong>{{ event.date }} at {{ event.time }}</strong></p>
+        <p>Entry: Rs {{ event.entry_fee }} · Seats left: {{ event.seats_left }}</p>
+        <form method="post" action="{% url 'customer_event_register' event.id %}">{% csrf_token %}<button class="btn" type="submit">Register</button></form>
+      </article>
+    {% empty %}<p class="muted">No open events right now.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

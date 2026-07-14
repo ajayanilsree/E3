@@ -1,0 +1,15 @@
+{% if recent_notifications %}
+<section class="panel">
+  <h2>Notifications</h2>
+  <div class="list">
+    {% for note in recent_notifications %}
+      <div class="list-row">
+        <div><strong>{{ note.title }}</strong><small>{{ note.message }}</small></div>
+        {% if not note.is_read %}
+          <a class="btn-mini" href="{% url 'mark_notification_read' note.id %}">Mark read</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

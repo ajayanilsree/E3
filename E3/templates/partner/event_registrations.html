@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Event Registrations - E3 Lounge{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Event Registrations</h1>
+  <div class="table-wrap"><table><thead><tr><th>Event</th><th>Member</th><th>Payment</th><th>Status</th><th>Update</th></tr></thead><tbody>
+  {% for registration in registrations %}
+  <tr><td>{{ registration.event.name }}</td><td>{{ registration.customer.member_id }}</td><td>{{ registration.payment_status }}</td><td>{{ registration.registration_status }}</td><td><form method="post" action="{% url 'event_registration_update' registration.id %}">{% csrf_token %}<select name="payment_status"><option value="unpaid" {% if registration.payment_status == "unpaid" %}selected{% endif %}>Unpaid</option><option value="paid" {% if registration.payment_status == "paid" %}selected{% endif %}>Paid</option><option value="refunded" {% if registration.payment_status == "refunded" %}selected{% endif %}>Refunded</option></select><select name="registration_status"><option value="pending" {% if registration.registration_status == "pending" %}selected{% endif %}>Pending</option><option value="confirmed" {% if registration.registration_status == "confirmed" %}selected{% endif %}>Confirmed</option><option value="cancelled" {% if registration.registration_status == "cancelled" %}selected{% endif %}>Cancelled</option><option value="waitlisted" {% if registration.registration_status == "waitlisted" %}selected{% endif %}>Waitlisted</option></select><button>Save</button></form></td></tr>
+  {% empty %}<tr><td colspan="5">No registrations yet.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}
