@@ -5,7 +5,9 @@
 {% block content %}
 <section class="auth-premium-shell auth-signup-shell">
   <div class="auth-premium-stack auth-signup-stack">
-    <img class="auth-premium-hero-logo auth-signup-logo" src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge">
+    <a class="auth-premium-logo-link" href="{% url 'home' %}" aria-label="Go to Home">
+      <img class="auth-premium-hero-logo auth-signup-logo" src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge">
+    </a>
 
     <form method="post" class="auth-premium-form auth-signup-form">
       {% csrf_token %}

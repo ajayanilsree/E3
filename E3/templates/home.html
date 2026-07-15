@@ -4,35 +4,69 @@
 {% block body_class %}home-page luxury-home{% endblock %}
 {% block extra_head %}
 <link rel="preconnect" href="https://images.unsplash.com">
-<link rel="stylesheet" href="{% static 'css/luxury-home.css' %}?v=8">
+<link rel="stylesheet" href="{% static 'css/luxury-home.css' %}?v=17">
 {% endblock %}
 {% block content %}
 <div class="e3-splash" data-e3-splash role="status" aria-live="polite" aria-label="Loading E3 Lounge">
   <div class="e3-splash__inner">
-    <img class="e3-splash__logo" src="{% static 'images/e3-navbar-logo.png' %}" alt="E3 Lounge">
+    <img class="e3-splash__logo" src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge">
     <p class="e3-splash__text">Initializing E3 Lounge...</p>
   </div>
 </div>
 
 <nav class="navbar">
-  <a class="logo" href="#top" aria-label="E3 Lounge home">
-    <img src="{% static 'images/e3-navbar-logo.png' %}" alt="E3 Lounge" height="61">
+  <a class="logo" href="#top" aria-label="Go to Home" data-home-logo>
+    <img src="{% static 'images/e3-login-mark.png' %}" alt="E3 Lounge" height="61">
   </a>
+  <div class="navbar__actions" aria-label="Primary navigation">
+    <a class="navbar__button navbar__button--login" href="{% url 'customer_login' %}">Login</a>
+    <a class="navbar__button navbar__button--signup" href="{% url 'register' %}">Sign Up</a>
+  </div>
 </nav>
 
-<section class="controller-hero" id="top" aria-label="Premium 3D gaming controller">
-  <div
-    class="controller-hero-canvas"
-    data-controller-hero
-    data-login-url="{% url 'customer_login' %}"
-    data-join-url="{% url 'register' %}"
-    data-touchpad-logo-url="{% static 'images/e3-touchpad-logo.png' %}"
-  ></div>
-</section>
+<section class="club-hero" id="top" aria-label="Exclusive luxury gaming club" data-luxury-hero>
+  <div class="club-hero__scene" aria-hidden="true">
+    <img class="club-hero__reference" src="{% static 'images/e3-luxury-hero-original.png' %}" alt="" aria-hidden="true">
+    <div class="club-hero__camera">
+      <div class="club-hero__room">
+        <div class="club-hero__wall club-hero__wall--left"></div>
+        <div class="club-hero__wall club-hero__wall--right"></div>
+        <div class="club-hero__wall club-hero__wall--back"></div>
+        <div class="club-hero__groove club-hero__groove--top"></div>
+        <div class="club-hero__groove club-hero__groove--bottom"></div>
+        <div class="club-hero__ceiling-ring"></div>
+        <div class="club-hero__led-wall"></div>
+        <div class="club-hero__screen-frame"></div>
+        <div class="club-hero__desk"></div>
+        <div class="club-hero__stations">
+          <div class="club-hero__station club-hero__station--one"></div>
+          <div class="club-hero__station club-hero__station--two"></div>
+          <div class="club-hero__station club-hero__station--three"></div>
+          <div class="club-hero__station club-hero__station--four"></div>
+        </div>
+        <div class="club-hero__trophy-shelf"></div>
+        <div class="club-hero__beam club-hero__beam--one"></div>
+        <div class="club-hero__beam club-hero__beam--two"></div>
+        <div class="club-hero__beam club-hero__beam--three"></div>
+        <div class="club-hero__chair club-hero__chair--one"></div>
+        <div class="club-hero__chair club-hero__chair--two"></div>
+        <div class="club-hero__chair club-hero__chair--three"></div>
+        <div class="club-hero__floor"></div>
+        <div class="club-hero__reflection club-hero__reflection--one"></div>
+        <div class="club-hero__reflection club-hero__reflection--two"></div>
+        <div class="club-hero__fog club-hero__fog--one"></div>
+        <div class="club-hero__fog club-hero__fog--two"></div>
+        <div class="club-hero__dust"></div>
+      </div>
+    </div>
+  </div>
 
-<button class="e3-scroll-indicator" type="button" data-scroll-indicator aria-label="Scroll to the experience section">
-  <span class="e3-scroll-indicator__arrow" aria-hidden="true">⌄</span>
-</button>
+  <div class="club-hero__content">
+    <p class="club-hero__eyebrow">PREMIUM GAMING EXPERIENCE</p>
+    <h1>ENTER THE NEXT LEVEL</h1>
+    <p class="club-hero__subhead">Experience premium gaming, exclusive events, competitive tournaments, and an elite community all in one destination.</p>
+  </div>
+</section>
 
 <section class="lux-feature lux-feature-a" id="experiences">
   <div class="feature-image reveal"></div>
@@ -124,6 +158,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'js/home.js' %}?v=4"></script>
-<script type="module" src="{% static 'js/controller-hero.js' %}?v=27"></script>
+<script src="{% static 'js/home.js' %}?v=6"></script>
 {% endblock %}
